@@ -1,0 +1,33 @@
+.about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-section, .mission-statement, .how-it-works, .testimonials, .cta-section {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.how-it-works ol {
+    text-align: left;
+    display: inline-block;
+}
+
+.cta-section button {
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .about-container {
+        padding: 10px;
+    }
+    .hero-section h1, .mission-statement h2, .how-it-works h2, .testimonials h2 {
+        font-size: 1.5rem;
+    }
+    .recommendation-picture {
+        width: 100%;
+    }
+}
