@@ -6,11 +6,15 @@ const natural = require('natural');
 const pos = require('pos')
 const app = express();
 const { removeStopwords } = require('stopword')
+const path = require("path");
+require('dotenv').config();
 
 app.use(express.json());
 app.use(cors());
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5006;
 app.options('/api/search', cors());
+
+app.use(express.static(path.join(__dirname, '../../build')));
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -42,6 +46,7 @@ async function topFiveLinks(searchTerm) {
     let allComments = [];
     try {
         const key = process.env.GOOGLE_API_KEY;
+        console.log('Key:', key)
         const link = 'https://www.googleapis.com/customsearch/v1?key=' + key + "&cx=27ca424020c1248b9&num=5&q=" + searchTerm;
         const response = await fetch(link);
         const data = await response.json();
@@ -187,5 +192,8 @@ function countProductOccurences(comments, products){
     return productCount;
 }
 
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../../build', 'index.html'));
+});
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
