@@ -68,7 +68,7 @@ async function topFiveLinks(searchTerm) {
 
 async function getAllCommentsForPost(link) {
     try {
-        const response = await fetch(link + "/article.json");
+        const response = await fetch(link + "article.json");
         const data = await response.json();
 
         const comments = data[1];
